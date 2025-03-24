@@ -81,6 +81,7 @@ def create_vector_store(documents: list[Document]) -> VectorStore:
     
 def create_rag_chain(db: VectorStore):
     retriever = db.as_retriever()
+    # use llama3 or deepseek-r1 (slower and more detailed thought process)
     llm = ChatOllama(model="llama3")
     
     # https://smith.langchain.com/hub/langchain-ai/chat-langchain-rephrase
@@ -133,6 +134,8 @@ def main():
         st.session_state.chat_history = []
 
     st.title(':orange[Chat]')
+    st.info('This is a chat bot intended to answer questions based on uploaded files. For example, you can upload resume then ask questions about the resume.', icon="ℹ️")
+
     user_question = stDatalist("Ask a question", [
             "What is your name", 
             "What are your hobbies", 
